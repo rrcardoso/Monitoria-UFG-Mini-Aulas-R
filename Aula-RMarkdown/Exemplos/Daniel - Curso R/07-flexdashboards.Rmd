@@ -1,0 +1,63 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Página 1
+=========================
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
+Página 2 {.storyboard}
+=======================
+
+### A nice scatterplot here
+
+```{r}
+plot(cars, pch = 20)
+grid()
+```
+
+---
+
+Some commentary about Frame 1.
+
+### A beautiful histogram on this board
+
+```{r}
+hist(faithful$eruptions, col = 'gray', border = 'white', main = '')
+```
+
+---
+
+Some commentary about Frame 2.
+

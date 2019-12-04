@@ -1,0 +1,309 @@
+---
+title: "Aula 1: Usando o R Markdown"
+author: "Rodrigo R Cardoso"
+date: "12 de abril de 2019"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+self-contained: True
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introdução
+***
+
+### O que é Markdown?
+
+O **Markdown** é uma linguagem de marcação leve que você pode usar para adicionar elementos de formatação a documentos de texto simples. Criado por John Gruber em 2004, o Markdown é hoje uma das linguagens de marcação mais populares do mundo.
+
+O uso do Markdown é diferente de usar um editor WYSIWYG (OQVVEOQVO). Em um aplicativo como o Microsoft Word, você clica nos botões para formatar palavras e frases, e as alterações são visíveis imediatamente. Markdown não é assim. Quando você cria um arquivo formatado Markdown, adiciona a sintaxe Markdown ao texto para indicar quais palavras e frases devem ter uma aparência diferente.
+
+### R Markdown
+
+O formato de documento “R Markdown” foi introduzido pela primeira vez no pacote **knitr** (Xie 2015 , 2019 b) no início de 2012. A ideia era incorporar blocos de código (de R ou outras linguagens) em documentos Markdown.
+
+A simplicidade do Markdown claramente se destaca dentre os formatos de documentos (LaTeX, HTML,...).
+
+No entanto, a versão original do Markdown de John Gruber era frequentemente considerada excessivamente simples e inadequada para escrever documentos altamente técnicos. Por exemplo, não havia sintaxe para tabelas, notas de rodapé, expressões matemáticas ou citações. Felizmente, John MacFarlane criou um pacote maravilhoso chamado **Pandoc** para converter documentos Markdown (e muitos outros tipos de documentos) em uma grande variedade de formatos de saída.
+
+Mais importante sobre o pandoc é que sintaxe do Markdown foi significativamente enriquecida. Agora podemos escrever mais tipos de elementos com o Markdown enquanto ainda desfrutamos da sua simplicidade.
+
+Resumindo, o R Markdown está apoiado em um bipé, o **knitr** e o **Pandoc**. O primeiro executa o código de computador incorporado no Markdown e converte o R Markdown em Markdown. O último processa Markdown para o formato de saída desejado (como PDF, HTML, Word e assim por diante).
+
+```{r, out.width='40%', fig.align='center', fig.cap='Figura 1: Logo R Markdown', echo=FALSE}
+knitr::include_graphics('hex-rmarkdown.png')
+```
+
+
+### O que o R Markdown pode fazer?
+
+Neste momento, há um grande número de tarefas que você poderia fazer com o R Markdown:
+
+* Compile um único documento R Markdown para um relatório em diferentes formatos, como PDF, HTML ou Word.
+
+* Crie blocos de anotações nos quais você pode executar diretamente blocos de código interativamente.
+
+* Faça slides para apresentações (HTML5, ioslides, LaTeX Beamer, PowerPoint).
+
+* Produza dashboards com layouts flexíveis, interativos e atraentes.
+
+* Crie aplicativos interativos baseados em Shiny.
+
+* Escreva artigos de periódicos.
+
+* Livros de autor de múltiplos capítulos.
+
+* Gerar sites e blogs.
+
+
+## Sintaxe do R Markdown
+
+***
+### Texto
+
+* __Texto simples__
+
+```
+Lorem ipsum lacus donec aliquet dapibus eu aliquam vulputate neque, ac pellentesque donec nibh enim hendrerit vivamus donec, metus nam vehicula turpis duis bibendum mollis iaculis. elit integer dolor rhoncus justo commodo aliquam ullamcorper amet, eu vivamus enim primis aptent eu neque sapien, fringilla a auctor consectetur vivamus imperdiet rhoncus.  
+```
+Lorem ipsum lacus donec aliquet dapibus eu aliquam vulputate neque, ac pellentesque donec nibh enim hendrerit vivamus donec, metus nam vehicula turpis duis bibendum mollis iaculis. elit integer dolor rhoncus justo commodo aliquam ullamcorper amet, eu vivamus enim primis aptent eu neque sapien, fringilla a auctor consectetur vivamus imperdiet rhoncus.
+
+***
+```
+*itálico* e _itálico_
+```
+*itálico* e _itálico_
+
+***
+```
+**negrito** e __negrito__
+```
+**negrito** e __negrito__
+
+***
+```
+sobrescrito^2^
+```
+sobrescrito^2^
+
+***
+```
+~~riscado~~
+```
+~~riscado~~
+
+***
+### Seções
+
+```
+# Seção
+## Subseção
+### Subsubseção
+#### Subsub da subseção
+##### Subsub da subsubseção
+```
+***
+### Lista
+
+```
+* Lista sem numeração
+    * sub-item A
+* item B
+ + sub-item B -- 1
+ + sub-item B -- 2
+
+1. Lista com numeração
+2. item 2
+ + sub-item 1
+ + sub-item 2 
+```
+
+* Lista sem numeração
+    * sub-item A
+* item B
+    + sub-item B -- 1
+    + sub-item B -- 2
+
+1. Lista com numeração
+2. item 2
+    + sub-item 1
+    + sub-item 2 
+    
+***
+### Tabela
+
+```
+Nome da coluna 1 | Nome da coluna 2
+---------------- | -------------
+Dados            | Dados
+Dados            | Dados 
+```
+Nome da coluna 1 | Nome da coluna 2
+---------------- | -------------
+Dados            | Dados
+Dados            | Dados 
+
+***
+
+### Equações
+
+```
+$$ A = \pi*r^{2} $$
+
+$$ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} $$
+```
+
+$$ A = \pi*r^{2} $$
+
+$$ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a} $$
+
+***
+
+### Imagens
+
+```
+![](rstudio.png){width="15%"}
+ 
+``{r, out.width='15%', echo=FALSE}
+knitr::include_graphics('rstudio.png')
+``
+
+```
+
+![](rstudio.png){width="15%"}
+ 
+```{r, out.width='15%', echo=FALSE}
+knitr::include_graphics('rstudio.png')
+```
+
+***
+### Citações
+
+```
+> Citação de alguém.
+```
+
+> Citação de alguém.
+
+***
+
+### Código R
+
+Blocos de códigos do R são incorporados ao documentos da seguinte forma:
+
+````
+```{r}`r ''`
+paste("Olá", "Mundo!")
+```
+````
+
+```{r}
+paste("Olá", "Mundo!")
+```
+
+> Para Inserir o __Chunk__ do R existe o atalho: CTRL + ALT + I
+
+Exemplo de utilização dos chunks com o Markdown
+
+````
+```{r, warning=FALSE, message=FALSE}`r ''`
+
+# Carregar pacotes
+library(tidyverse)
+
+# Carregar os dados
+data(mtcars)
+
+# Mostrar a cara dos dados 
+head(mtcars)
+
+# Calcular número de carros por cilindros
+table(mtcars$cyl)
+
+# Gerar gráfico do número de carros por cilindros
+barplot(
+  height = table(mtcars$cyl),
+  main = "Número de Carros por Qtd. de cilindros.",
+  ylab = "Número de Carros",
+  xlab = "Qtd. de cilindros",
+  col = "lightblue",
+  border = "#104e8b"
+  )
+
+
+```
+````
+
+```{r, warning=FALSE, message=FALSE}
+# Carregar pacotes
+library(tidyverse)
+
+# Carregar os dados
+data(mtcars)
+
+# Mostrar a cara dos dados 
+head(mtcars)
+
+# Calcular número de carros por cilindros
+table(mtcars$cyl)
+
+# Gerar gráfico do número de carros por cilindros
+barplot(
+  height = table(mtcars$cyl),
+  main = "Figura 1: Número de Carros por Qtd. de cilindros.",
+  ylab = "Número de Carros",
+  xlab = "Qtd. de cilindros",
+  col = "lightblue",
+  border = "#104e8b"
+  )
+
+```
+
+Através da *Figura 1*, vemos que o **maior** número de carros (14) possuem 8 cilindros, e o **menor** número de carros (7) possuem 6 cilindros. 
+
+
+## Links Úteis
+***
+
+[Site - R Markdown](https://rmarkdown.rstudio.com/)
+
+[Livro - R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+[R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+[R Markdown Cheat Cheet](https://www.rstudio.org/links/r_markdown_cheat_sheet)
+
+[Site - Producing Simple Graphs with R](https://www.harding.edu/fmccown/r/)
+
+[Site - Bookdown](https://bookdown.org/)
+
+## Referências
+***
+
+Xie, Yihui, J.J. Allaire, and Garrett Grolemund. 2018. R Markdown: The Definitive Guide. Boca Raton, Florida: Chapman; Hall/CRC. [https://bookdown.org/yihui/rmarkdown](https://bookdown.org/yihui/rmarkdown).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

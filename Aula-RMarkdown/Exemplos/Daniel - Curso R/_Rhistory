@@ -1,0 +1,100 @@
+install.packages("xaringan")
+install.packages("devtools")
+system("python \"C:/Users/Rodrigo.Cardoso/1 - Rodrigo/teste.py\"")
+library(magrittr)
+?divide_by
+?divide_by()
+x = c(1:10)
+x/2
+divide_by(x, 2)
+x %>%
+divide_by(, 2)
+x %>%
+divide_by(, 2)
+x %>%
+divide_by(., 2)
+x %>%
+/2
+x %>%
+./2
+x %>%
+./2
+x %>%
+(./2)
+x %>%
+set_names(., value = extract(letters, 10))
+extract(letters, 10)
+extract(letters, 1:10)
+set_names(., value = letters[1:10]
+)
+x %>%
+set_names(., value = letters[1:10])
+iris
+iris %>%
+extract(, 1:4) %>%
+head
+Sys.Date()
+as.POSIXct
+good.times <-
+Sys.Date() %>%
+as.POSIXct %>%
+seq(by = "15 mins", length.out = 100) %>%
+data.frame(timestamp = .)
+?as.POSIXct
+good.times
+good.times <-
+Sys.Date() %>%
+as.POSIXct
+good.times
+months(now)
+good.times$quarter <-
+good.times %>%
+use_series(timestamp) %>%
+format("%M") %>%
+as.numeric %>%
+divide_by_int(15) %>%
+add(1)
+good.times <-
+Sys.Date() %>%
+as.POSIXct %>%
+seq(by = "15 mins", length.out = 100) %>%
+data.frame(timestamp = .)
+good.times$quarter <-
+good.times %>%
+use_series(timestamp) %>%
+format("%M") %>%
+as.numeric %>%
+divide_by_int(15) %>%
+add(1)
+good.times
+?add
+?POSIXct
+x = 10
+x = 10 %>%
+seq(by = 1, length.out = 10)
+x
+x = 10 %>%
+seq(by = 0.1, length.out = 1000)
+x
+x = 10 %>%
+seq(by = 0.1, length = 1000)
+x
+x = 10 %>%
+seq(by = 0.1, length = 100)
+x
+(z <- Sys.time())
+str(z)
+Sys.time() - 3600
+as.POSIXlt(Sys.time(), "GMT")
+format(.leap.seconds)
+print(.leap.seconds, tz = "PST8PDT")
+?magrittr
+?add
+x = 10 %>%
+seq(by = 1, length = 10)
+x %>%
++5
+x %>%
+add(5)
+?seq_along
+seq_along(x)

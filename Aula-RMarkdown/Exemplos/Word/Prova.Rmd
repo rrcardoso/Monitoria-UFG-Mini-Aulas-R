@@ -1,0 +1,64 @@
+---
+title: "Prova 1 - Estatística Computacional I"
+author: "Rodrigo Cardoso"
+date: "8 de abril de 2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Questão 1
+
+### a) Carregue os dados *mtcars* no R.
+```{r}
+data("mtcars")
+
+head(mtcars)
+```
+
+
+### b) Faça uma análise descritiva simples da variável *mpg*.
+```{r}
+summary(mtcars$mpg)
+```
+
+A variável *mpg* é o número de milhas por galão, ou seja, consumo. O consumo mínimo é de 10,40 mpg, o máximo é de 33,90 mpg. Em média os carros tem consumo de 20,09 mpg. 
+
+### c) Faça um boxplot da variável *mpg*
+```{r}
+boxplot(mtcars$mpg, 
+        main = "Boxplot do Número de milhas por galão")
+```
+
+
+### c) Faça uma tabela de Frequência do número de cilindro por tipo de Trasmissão. Se necessário, use o comando *help()*
+
+```{r}
+table(mtcars$cyl, mtcars$am)
+```
+
+
+## Questão 2 
+
+### a) Usando uma estrutura de loop e/ou estrutra condicional, adicione aos dados *mtcars* uma nova variável: CONSUMO: Alto Consumo, Baixo Consumo.
+
+Considere *Alto consumo* aqueles carros com *mpg* maior que a média
+Considere *Baixo consumo* aqueles carros com *mpg* menor que a média
+
+```{r}
+mtcars$CONSUMO = ifelse(
+  mtcars$mpg > mean(mtcars$mpg), "Alto Consumo", "Baixo Consumo")
+
+mean(mtcars$mpg)
+
+head(mtcars[,c("mpg","CONSUMO")], 10)
+```
+
+### b) Faça um gráfico de barras da nova variável criada no item a).
+
+```{r}
+barplot(table(mtcars$CONSUMO))
+```
+

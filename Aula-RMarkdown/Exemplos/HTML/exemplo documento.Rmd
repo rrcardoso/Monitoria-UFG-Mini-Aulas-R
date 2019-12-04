@@ -1,0 +1,143 @@
+---
+title: "Aula 2 - Análise descritiva de dados usando R"
+in_header: \usepackage{graphicx, color, verbatim, fancyvrb, setspace, amsfonts, amsmath,amssymb}
+output:
+  html_document: default
+  pdf_document: default
+fig_caption: yes
+---
+
+```{r}
+#Apagar todos os objetos da memoria
+rm(list=ls())
+```
+
+
+
+#Estatística Descritiva
+
+Estatística Descritiva é a **etapa inicial** da análise utilizada para descrever e **resumir os dados**. 
+A disponibilidade de uma grande quantidade de dados e de métodos computacionais muito eficientes 
+revigorou esta área da estatística (Lachos).
+
+
+#Variáveis
+Qualquer característica associada a uma população.
+
+As variáveis podem ser classificadas em:
+
+1. Qualitativas: são as características definidas por várias categorias, ou seja, representam uma classificação dos indivíduos. Exemplo: Região de procedencia e grau de instrução.
+
+    1.1 Nominais: Não existe nenhuma ordenação nas possíveis realizações. Exemplo:
+    Região de procedencia.
+    1.2 Ordinais: Existe uma ordem de seus resultados. Exemplo: Grau de instrução
+
+2. Quantitativas:  são as características que podem ser medidas em uma escala quantitativa. Exemplo: Numero de filhos e Salarios.
+
+    2.1 Discretas: cujos possíveis valores formam um conjunto finito ou enumerável. Exemplo: Numero de filhos.
+    2.2 Contínuas: cujos possíveis valores pertencem a um intervalo de numeros
+    reais. Exemplo: Salario, estatura e peso
+    
+#Exemplo: Tabela 2.1 do livro Estatistica Basica (Morettin & Bussab)
+
+```{r}
+#Ler os dados
+tab21 = read.table("tabela2.1.txt", sep=";", dec=",", header = TRUE)
+
+#Classe do objeto
+class(tab21)
+
+#Nomes das colunas do objeto
+names(tab21)
+
+#Verificar o tipo de variável de cada coluna do data.frame
+str(tab21)
+
+#Imprimir as primeiras linhas do data.frame
+head(tab21)
+
+#Tabela de Frequencia Absoluta
+tabFAbs = table(tab21$reg_procedencia)
+
+tabFAbs
+
+#Tabela de Frequencia Relativa
+tabFRel = prop.table(tabFAbs)
+
+tabFRel
+```
+
+#Gráficos para variáveis qualitativas e quantitativas discretas
+
+##Gráficos de barras
+
+O gráfico em barras consiste em construir retangulos, em que uma das dimensões
+é proporcional a frequencia absoluta ou relativa e a outra  é arbitraria, 
+porem igual para todos os retangulos. Essas barras são dispostas paralelamente
+umas às outras
+
+```{r}
+#Grafico de barras - Frequencia Absoluta
+barplot(tabFAbs, xlab = "Regiao de Procedencia", ylab = "Frequencia Absoluta")
+
+#Graficos de barras - Frequencia Relativa
+barplot(tabFRel, xlab = "Regiao de Procedencia", ylab = "Frequencia Relativa", ylim=c(0,1))
+```
+
+##Gráfico de composição
+
+Gráfico de composição em setores, sendo em forma de "pizza" o mais 
+conhecido, consiste num circulo de raio arbitrario, representando o todo,
+dividido em setores, que correspondem as partes de maneira proporcional.
+
+
+```{r}
+#Rotulo com as porcentagens
+
+names(tabFAbs)
+
+100*round(tabFRel,2)
+
+
+lab = paste(names(tabFAbs)," ",100*round(tabFRel,2), "%",sep="")
+
+lab
+
+#Grafico de pizza
+pie(tabFAbs,labels = lab)
+
+```
+
+
+#Gráficos para variáveis quantitativas contínuas
+
+##Histogramas
+
+Um histograma é uma representação visual da distribuição de um cojunto de dados.
+Matematicamente, o histograma é um gráfico de barras contíguas, com as bases
+proporcionais aos intervalos de classes $\Delta$ e a área de cada retangulo proporcional à respectiva frequencia $f_i$. Para que a área do retangulo respectivo seja proporcional a $f_i$, a sua altura deve ser proporcional a
+$\frac{f_i}{\Delta}$, que é chamada densidade de frequencia da i-ésima classe.
+Com essa convenção, a área total do histograma será igual a 1.
+
+
+```{r}
+#Histogramas - Estatistica Basica Morettin & Bussab
+
+hist(tab21$salario,breaks=seq(4,24,by=4), prob=TRUE, xlab="Salarios",
+     ylab = "Densidade", col="blue", ylim=c(0,0.1), xlim=c(0,30),
+     main="Distribuicao dos Salarios")
+#Faz um histograma para os dados de salario, que o eixo das abcissas 
+#inicia no ponto 4 e termina no 24 com intervalos de classe de 4 unidades.
+#O limite inferior do eixo das ordenadas eh zero e o limite superior eh
+#0.1
+#O limite inferior do eixo das abscissas eh zero e o limite superior eh
+#30
+
+#Histograma com a regra de Sturges
+
+hist(tab21$salario,breaks= nclass.Sturges(tab21$salario), prob=TRUE, xlab="Salarios", ylab = "Densidade", col="red", ylim=c(0,0.15), xlim=c(0,30),
+     main="Distribuicao dos Salarios - Regra de Sturges")
+
+```
+
+
